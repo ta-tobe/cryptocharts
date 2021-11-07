@@ -5,5 +5,3 @@ dash-html-components
 dash-core-components
 dash-renderer
 gunicorn===19.9.0
-DateTime==4.3
-pandas==0.24.2
