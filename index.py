@@ -22,45 +22,45 @@ title = html.Div(
     ], className='card-title'
 )
 
-collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
-#     dbc.Col(time_interval_filter),
-#                                       dbc.Col(bundle_filter),
-#                                       dbc.Col(category_filter),
-#                                       dbc.Col(blockchain_filter)
-]
-                                     )], color="light")
+# collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
+# #     dbc.Col(time_interval_filter),
+# #                                       dbc.Col(bundle_filter),
+# #                                       dbc.Col(category_filter),
+# #                                       dbc.Col(blockchain_filter)
+# ]
+#                                      )], color="light")
 
-navbar = html.Div(
-    [
-        dbc.Button(
-            "Filters",
-            id="collapse-button",
-            className="mb-3",
-            color="primary",
-            n_clicks=0,
-        ),
-        dbc.Collapse(
-            collapse_content,
-            id="collapse",
-            is_open=False,
-        ),
-    ],
-)
+# navbar = html.Div(
+#     [
+#         dbc.Button(
+#             "Filters",
+#             id="collapse-button",
+#             className="mb-3",
+#             color="primary",
+#             n_clicks=0,
+#         ),
+#         dbc.Collapse(
+#             collapse_content,
+#             id="collapse",
+#             is_open=False,
+#         ),
+#     ],
+# )
 
 
-@app.callback(
-    Output("collapse", "is_open"),
-    [Input("collapse-button", "n_clicks")],
-    [State("collapse", "is_open")],
-)
-def toggle_collapse(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+# @app.callback(
+#     Output("collapse", "is_open"),
+#     [Input("collapse-button", "n_clicks")],
+#     [State("collapse", "is_open")],
+# )
+# def toggle_collapse(n, is_open):
+#     if n:
+#         return not is_open
+#     return is_open
 
 
 app.layout = html.Div([title,
-                       navbar,
+#                        navbar,
 #                        cards,
 #                        attribution
                       ]
