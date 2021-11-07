@@ -1,8 +1,14 @@
 import os
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+# import dash
+# import dash_core_components as dcc
+# import dash_html_components as html
+import pandas as pd
+import plotly.express as px  # (version 4.7.0 or higher)
+from dash import Dash, dcc, html, Input, Output  # pip install dash (version 2.0.0 or higher)
+import requests
+import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output, State
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
