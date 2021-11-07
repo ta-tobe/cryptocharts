@@ -20,15 +20,6 @@ title = html.Div(
     ], className='card-title'
 )
 
-collapse_content = dbc.Card([dbc.Row([
-                                        dbc.Col(html.Div("One of three columns")),
-#                                       dbc.Col(time_interval_filter),
-#                                       dbc.Col(bundle_filter),
-#                                       dbc.Col(category_filter),
-#                                       dbc.Col(blockchain_filter)
-                                     ]
-                                     )], color="light")
-
 navbar = html.Div(
     [
         dbc.Button(
@@ -39,7 +30,8 @@ navbar = html.Div(
             n_clicks=0,
         ),
         dbc.Collapse(
-            collapse_content,
+#             collapse_content,
+            html.Div("One of three columns"),
             id="collapse",
             is_open=False,
         ),
