@@ -21,7 +21,7 @@ title = html.Div(
 )
 
 collapse_content = dbc.Card([dbc.Row([
-                                        dbc.Col('test'),
+                                        dbc.Col(html.Div("One of three columns")),
 #                                       dbc.Col(time_interval_filter),
 #                                       dbc.Col(bundle_filter),
 #                                       dbc.Col(category_filter),
