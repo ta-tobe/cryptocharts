@@ -6,5 +6,4 @@ dash-core-components
 dash-renderer
 gunicorn===19.9.0
 DateTime==4.3
-scipy==1.2.1
 pandas==0.24.2
