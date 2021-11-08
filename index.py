@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-from dash_bootstrap_components._components.Container import Container
+# from dash_bootstrap_components._components.Container import Container
 import pandas as pd
 import plotly.express as px 
 
@@ -181,7 +181,7 @@ cards = dbc.Row(
 
 # Connect the Plotly graphs with Dash Components
 @app.callback(
-    dash.dependencies.Output('fee-bar', 'figure'),
+    Output('fee-bar', 'figure'),
     Output('fee-pie', 'figure'),
     Output('fee-bchain', 'figure'),
     Input('multichain-radioitems', 'value'),
