@@ -1,6 +1,5 @@
 Flask==1.1.1
 dash
-plotly==4.1.1
 dash-html-components
 dash-core-components
 dash-bootstrap-components
