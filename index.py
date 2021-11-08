@@ -24,96 +24,96 @@ title = html.Div(
     ], className='card-title'
 )
 
-# collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
-# #     dbc.Col(time_interval_filter),
-# #                                       dbc.Col(bundle_filter),
-# #                                       dbc.Col(category_filter),
-# #                                       dbc.Col(blockchain_filter)
-# ]
-#                                      )], color="light")
+collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
+#     dbc.Col(time_interval_filter),
+#                                       dbc.Col(bundle_filter),
+#                                       dbc.Col(category_filter),
+#                                       dbc.Col(blockchain_filter)
+]
+                                     )], color="light")
 
-# navbar = html.Div(
-#     [
-#         dbc.Button(
-#             "Filters",
-#             id="collapse-button",
-#             className="mb-3",
-#             color="primary",
-#             n_clicks=0,
-#         ),
-#         dbc.Collapse(
-#             collapse_content,
-#             id="collapse",
-#             is_open=False,
-#         ),
-#     ],
-# )
-
-
-# @app.callback(
-#     Output("collapse", "is_open"),
-#     [Input("collapse-button", "n_clicks")],
-#     [State("collapse", "is_open")],
-# )
-# def toggle_collapse(n, is_open):
-#     if n:
-#         return not is_open
-#     return is_open
-
-search_bar = dbc.Row(
+navbar = html.Div(
     [
-        dbc.Col(dbc.Input(type="search", placeholder="Search")),
-        dbc.Col(
-            dbc.Button(
-                "Search", color="primary", className="ms-2", n_clicks=0
-            ),
-            width="auto",
+        dbc.Button(
+            "Filters",
+            id="collapse-button",
+            className="mb-3",
+            color="primary",
+            n_clicks=0,
+        ),
+        dbc.Collapse(
+            collapse_content,
+            id="collapse",
+            is_open=False,
         ),
     ],
-    className="g-0 ms-auto flex-nowrap mt-3 mt-md-0",
-    align="center",
-)
-
-navbar = dbc.Navbar(
-    dbc.Container(
-        [
-            html.A(
-                # Use row and col to control vertical alignment of logo / brand
-                dbc.Row(
-                    [
-                        dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
-                        dbc.Col(dbc.NavbarBrand("Navbar", className="ms-2")),
-                    ],
-                    align="center",
-                    className="g-0",
-                ),
-                href="https://plotly.com",
-                style={"textDecoration": "none"},
-            ),
-            dbc.NavbarToggler(id="navbar-toggler", n_clicks=0),
-            dbc.Collapse(
-                search_bar,
-                id="navbar-collapse",
-                is_open=False,
-                navbar=True,
-            ),
-        ]
-    ),
-    color="dark",
-    dark=True,
 )
 
 
-# add callback for toggling the collapse on small screens
 @app.callback(
-    Output("navbar-collapse", "is_open"),
-    [Input("navbar-toggler", "n_clicks")],
-    [State("navbar-collapse", "is_open")],
+    Output("collapse", "is_open"),
+    [Input("collapse-button", "n_clicks")],
+    [State("collapse", "is_open")],
 )
-def toggle_navbar_collapse(n, is_open):
+def toggle_collapse(n, is_open):
     if n:
         return not is_open
     return is_open
+
+# search_bar = dbc.Row(
+#     [
+#         dbc.Col(dbc.Input(type="search", placeholder="Search")),
+#         dbc.Col(
+#             dbc.Button(
+#                 "Search", color="primary", className="ms-2", n_clicks=0
+#             ),
+#             width="auto",
+#         ),
+#     ],
+#     className="g-0 ms-auto flex-nowrap mt-3 mt-md-0",
+#     align="center",
+# )
+
+# navbar = dbc.Navbar(
+#     dbc.Container(
+#         [
+#             html.A(
+#                 # Use row and col to control vertical alignment of logo / brand
+#                 dbc.Row(
+#                     [
+#                         dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
+#                         dbc.Col(dbc.NavbarBrand("Navbar", className="ms-2")),
+#                     ],
+#                     align="center",
+#                     className="g-0",
+#                 ),
+#                 href="https://plotly.com",
+#                 style={"textDecoration": "none"},
+#             ),
+#             dbc.NavbarToggler(id="navbar-toggler", n_clicks=0),
+#             dbc.Collapse(
+#                 search_bar,
+#                 id="navbar-collapse",
+#                 is_open=False,
+#                 navbar=True,
+#             ),
+#         ]
+#     ),
+#     color="dark",
+#     dark=True,
+# )
+
+
+# # add callback for toggling the collapse on small screens
+# @app.callback(
+#     Output("navbar-collapse", "is_open"),
+#     [Input("navbar-toggler", "n_clicks")],
+#     [State("navbar-collapse", "is_open")],
+# )
+# def toggle_navbar_collapse(n, is_open):
+#     if n:
+#         return not is_open
+#     return is_open
 
 app.layout = html.Div([title,
                        navbar,
