@@ -320,12 +320,8 @@ def update_graph(mchain, cat, bchain, start_date, end_date):
     ))
 
     pie1.update_annotations(opacity=0.2)
-    
-    data_canada = px.data.gapminder().query("country == 'Canada'")
-    fig = px.bar(data_canada, x='year', y='pop')
 
-#     return bar1, pie1, bar2
-    return fig, fig, fig
+    return bar1, pie1, bar2
 
 attribution = dbc.Row(
     [
