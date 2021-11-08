@@ -28,49 +28,49 @@ time_interval_filter = html.Div([
     html.Div([html.P('Time interval:')],
              style={'display': 'inline-block', 'margin-left': '5px', 'margin-right': '15px'}),
 
-    html.Div([dcc.DatePickerRange(
-        id='date-picker-range',
-        start_date=(pd.to_datetime(today) - pd.Timedelta(1, unit='d')).strftime('%Y-%m-%d'),
-        end_date=today,
-        display_format='YYYY-M-DD')],
-        style={'display': 'inline-block'})
+#     html.Div([dcc.DatePickerRange(
+#         id='date-picker-range',
+#         start_date=(pd.to_datetime(today) - pd.Timedelta(1, unit='d')).strftime('%Y-%m-%d'),
+#         end_date=today,
+#         display_format='YYYY-M-DD')],
+#         style={'display': 'inline-block'})
 ])
 
 bundle_filter = html.Div([
     html.Div([html.P('Bundle:')],
              style={'display': 'inline-block', 'margin-left': '5px', 'margin-right': '15px'}),
-    html.Div([dbc.RadioItems(
-        id='multichain-radioitems',
-        options=[{'label': 'Multi-chain', 'value': 'M'},
-                 {'label': 'Single-chain', 'value': 'S'}],
-        value='M'
-    )])
+#     html.Div([dbc.RadioItems(
+#         id='multichain-radioitems',
+#         options=[{'label': 'Multi-chain', 'value': 'M'},
+#                  {'label': 'Single-chain', 'value': 'S'}],
+#         value='M'
+#     )])
 ])
 
 category_filter = html.Div([
     html.Div([html.P('Category:')],
              style={'margin-left': '5px', 'margin-right': '15px'}),
-    html.Div([dcc.Dropdown(
-        id='category-dropdown',
-        options=[
-            {'label': i, 'value': i} for i in df.category.unique().tolist()
-        ],
-        value=df.category.unique().tolist(),
-        multi=True
-    )])
+#     html.Div([dcc.Dropdown(
+#         id='category-dropdown',
+#         options=[
+#             {'label': i, 'value': i} for i in df.category.unique().tolist()
+#         ],
+#         value=df.category.unique().tolist(),
+#         multi=True
+#     )])
 ])
 
 blockchain_filter = html.Div([
     html.Div([html.P('Blockchain:')],
              style={'margin-left': '5px', 'margin-right': '15px'}),
-    html.Div([dcc.Dropdown(
-        id='blockchain-dropdown',
-        options=[
-            {'label': i, 'value': i} for i in df.blockchain.unique().tolist()
-        ],
-        value=df.blockchain.unique().tolist(),
-        multi=True
-    )])
+#     html.Div([dcc.Dropdown(
+#         id='blockchain-dropdown',
+#         options=[
+#             {'label': i, 'value': i} for i in df.blockchain.unique().tolist()
+#         ],
+#         value=df.blockchain.unique().tolist(),
+#         multi=True
+#     )])
 ])
 
 collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
