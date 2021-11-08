@@ -320,8 +320,12 @@ def update_graph(mchain, cat, bchain, start_date, end_date):
     ))
 
     pie1.update_annotations(opacity=0.2)
+    
+    data_canada = px.data.gapminder().query("country == 'Canada'")
+    fig = px.bar(data_canada, x='year', y='pop')
 
-    return bar1, pie1, bar2
+#     return bar1, pie1, bar2
+    return fig, fig, fig
 
 attribution = dbc.Row(
     [
@@ -340,21 +344,6 @@ app.layout = html.Div([title,
                              'margin-right': '25px', 'margin-left': '25px',
                              }
                       )
-
-# app.layout = html.Div([
-#     html.H2('Hello World'),
-#     dcc.Dropdown(
-#         id='dropdown',
-#         options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
-#         value='LA'
-#     ),
-#     html.Div(id='display-value')
-# ])
-
-# @app.callback(dash.dependencies.Output('display-value', 'children'),
-#                 [dash.dependencies.Input('dropdown', 'value')])
-# def display_value(value):
-#     return 'You have selected "{}"'.format(value)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
