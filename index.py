@@ -24,6 +24,55 @@ title = html.Div(
     ], className='card-title'
 )
 
+time_interval_filter = html.Div([
+    html.Div([html.P('Time interval:')],
+             style={'display': 'inline-block', 'margin-left': '5px', 'margin-right': '15px'}),
+
+    html.Div([dcc.DatePickerRange(
+        id='date-picker-range',
+        start_date=(pd.to_datetime(today) - pd.Timedelta(1, unit='d')).strftime('%Y-%m-%d'),
+        end_date=today,
+        display_format='YYYY-M-DD')],
+        style={'display': 'inline-block'})
+])
+
+bundle_filter = html.Div([
+    html.Div([html.P('Bundle:')],
+             style={'display': 'inline-block', 'margin-left': '5px', 'margin-right': '15px'}),
+    html.Div([dbc.RadioItems(
+        id='multichain-radioitems',
+        options=[{'label': 'Multi-chain', 'value': 'M'},
+                 {'label': 'Single-chain', 'value': 'S'}],
+        value='M'
+    )])
+])
+
+category_filter = html.Div([
+    html.Div([html.P('Category:')],
+             style={'margin-left': '5px', 'margin-right': '15px'}),
+    html.Div([dcc.Dropdown(
+        id='category-dropdown',
+        options=[
+            {'label': i, 'value': i} for i in df.category.unique().tolist()
+        ],
+        value=df.category.unique().tolist(),
+        multi=True
+    )])
+])
+
+blockchain_filter = html.Div([
+    html.Div([html.P('Blockchain:')],
+             style={'margin-left': '5px', 'margin-right': '15px'}),
+    html.Div([dcc.Dropdown(
+        id='blockchain-dropdown',
+        options=[
+            {'label': i, 'value': i} for i in df.blockchain.unique().tolist()
+        ],
+        value=df.blockchain.unique().tolist(),
+        multi=True
+    )])
+])
+
 collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
 #     dbc.Col(time_interval_filter),
 #                                       dbc.Col(bundle_filter),
@@ -60,60 +109,6 @@ def toggle_collapse(n, is_open):
         return not is_open
     return is_open
 
-# search_bar = dbc.Row(
-#     [
-#         dbc.Col(dbc.Input(type="search", placeholder="Search")),
-#         dbc.Col(
-#             dbc.Button(
-#                 "Search", color="primary", className="ms-2", n_clicks=0
-#             ),
-#             width="auto",
-#         ),
-#     ],
-#     className="g-0 ms-auto flex-nowrap mt-3 mt-md-0",
-#     align="center",
-# )
-
-# navbar = dbc.Navbar(
-#     dbc.Container(
-#         [
-#             html.A(
-#                 # Use row and col to control vertical alignment of logo / brand
-#                 dbc.Row(
-#                     [
-#                         dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
-#                         dbc.Col(dbc.NavbarBrand("Navbar", className="ms-2")),
-#                     ],
-#                     align="center",
-#                     className="g-0",
-#                 ),
-#                 href="https://plotly.com",
-#                 style={"textDecoration": "none"},
-#             ),
-#             dbc.NavbarToggler(id="navbar-toggler", n_clicks=0),
-#             dbc.Collapse(
-#                 search_bar,
-#                 id="navbar-collapse",
-#                 is_open=False,
-#                 navbar=True,
-#             ),
-#         ]
-#     ),
-#     color="dark",
-#     dark=True,
-# )
-
-
-# # add callback for toggling the collapse on small screens
-# @app.callback(
-#     Output("navbar-collapse", "is_open"),
-#     [Input("navbar-toggler", "n_clicks")],
-#     [State("navbar-collapse", "is_open")],
-# )
-# def toggle_navbar_collapse(n, is_open):
-#     if n:
-#         return not is_open
-#     return is_open
 
 app.layout = html.Div([title,
                        navbar,
