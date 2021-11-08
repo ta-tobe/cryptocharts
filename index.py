@@ -142,6 +142,185 @@ def toggle_collapse(n, is_open):
         return not is_open
     return is_open
 
+fee_bar = dcc.Graph(id='fee-bar')
+
+fee_pie = dcc.Graph(id='fee-pie')
+
+fee_bchain = dcc.Graph(id='fee-bchain')
+
+first_card = dbc.Card(
+    fee_bar
+)
+
+second_card = dbc.Card(
+    fee_pie
+)
+
+third_card = dbc.Card(fee_bchain)
+
+cards = dbc.Row(
+    [
+        dbc.Row(
+            [dbc.Col(third_card)],
+            style={'margin-top': 25, 'margin-bottom': 10,
+                   # 'margin-right': '25px', 'margin-left': '25px',
+                   }
+        ),
+
+        dbc.Row(
+            [
+                dbc.Col(first_card, width=6),
+                dbc.Col(second_card, width=6),
+            ],
+        ),
+    ]
+)
+
+
+# Connect the Plotly graphs with Dash Components
+@app.callback(
+    dash.dependencies.Output('fee-bar', 'figure'),
+    Output('fee-pie', 'figure'),
+    Output('fee-bchain', 'figure'),
+    Input('multichain-radioitems', 'value'),
+    Input('category-dropdown', 'value'),
+    Input('blockchain-dropdown', 'value'),
+    Input('date-picker-range', 'start_date'),
+    Input('date-picker-range', 'end_date'))
+def update_graph(mchain, cat, bchain, start_date, end_date):
+    filtered_df = df.copy()
+
+    # # filter non-float values from 'fee' column
+    # filtered_df = filtered_df[pd.to_numeric(filtered_df.fee, errors='coerce').notnull()]
+
+    filtered_df = filtered_df[filtered_df.category.isin(cat)]
+
+    filtered_df = filtered_df[filtered_df.blockchain.isin(bchain)]
+
+    filtered_df = filtered_df[filtered_df['date'].between(start_date, end_date, inclusive=True)]
+
+    filtered_df = filtered_df.groupby(['id', 'name', 'blockchain']).sum()['fee'].reset_index()
+
+    filtered_df['id_other'] = filtered_df.id.where(
+        filtered_df.id.isin(filtered_df.nlargest(10, 'fee').id), 'Other')
+
+    filtered_df['name_other'] = filtered_df.name.where(
+        filtered_df.name.isin(filtered_df.nlargest(10, 'fee').name), 'Other')
+
+    # print(filtered_df.columns)
+
+    if mchain == 'M':
+        filtered_df['id'] = filtered_df['name'].copy()
+        filtered_df['id_other'] = filtered_df['name_other'].copy()
+
+    bar1_data = filtered_df.groupby('id').sum().reset_index().nlargest(10, 'fee').sort_values(by='fee', ascending=False)
+    bar1 = px.bar(
+        bar1_data,
+        y='id',
+        x='fee',
+        text='fee',
+        color='id',
+        labels={
+            "id": "",
+            "fee": "Fee ($)"},
+        orientation='h',
+        title='Top 10 fee generators',
+        color_discrete_sequence=px.colors.qualitative.Set3,
+    )
+
+    bar2_data = filtered_df.groupby('blockchain').sum().reset_index().nlargest(10, 'fee').sort_values(by='fee',
+                                                                                                      ascending=False)
+    bar2 = px.bar(
+        bar2_data,
+        x='blockchain',
+        y='fee',
+        text='fee',
+        color='blockchain',
+        labels={
+            "blockchain": "",
+            "fee": "Fee ($)"},
+        title='Top 10 blockchains',
+        color_discrete_sequence=px.colors.qualitative.Set3,
+    )
+
+    pie1_data = filtered_df.groupby('id_other').sum().reset_index()
+    pie1 = px.pie(pie1_data,
+                  values='fee',
+                  color='id_other',
+                  names='id_other',
+                  title='Fee distribution',
+                  color_discrete_sequence=px.colors.qualitative.Set3,
+                  # template='ggplot2'
+                  )
+
+    pie1.update_traces(textposition='inside', textinfo='percent+label')
+    pie1.update_layout(
+        # paper_bgcolor=theme_dict['white-gray']
+        # ,showlegend=False
+    )
+
+    bar1.update_traces(texttemplate='%{text:.2s}', textposition='auto')
+    bar1.update_layout(
+        # paper_bgcolor=theme_dict['white-gray'],
+        showlegend=False,
+        legend_title_text='')
+    bar1.update_yaxes(title='', showticklabels=True, visible=True)
+
+    bar2.update_traces(texttemplate='%{text:.2s}', textposition='auto')
+    bar2.update_layout(
+        # paper_bgcolor=theme_dict['white-gray'],
+        showlegend=False,
+        legend_title_text='')
+    bar2.update_xaxes(title='', showticklabels=True, visible=True)
+    # add annotation
+    bar2.add_annotation(dict(font=dict(
+        color='grey',
+        # size=75
+    ),
+        x=0.5,
+        y=0.5,
+        showarrow=False,
+        text="crypto-charts.info",
+        textangle=0,
+        xanchor='center',
+        xref="paper",
+        yref="paper"))
+
+    bar2.update_annotations(opacity=0.2)
+
+    bar1.add_annotation(dict(font=dict(
+        color='grey',
+        # size=75
+    ),
+        x=0.5,
+        y=0.5,
+        showarrow=False,
+        text="crypto-charts.info",
+        textangle=0,
+        xanchor='center',
+        xref="paper",
+        yref="paper"))
+
+    bar1.update_annotations(opacity=0.2)
+
+    pie1.add_annotation(dict(font=dict(
+        color='grey',
+        # size=75
+    ),
+        x=0.5,
+        y=0.5,
+        showarrow=False,
+        text="crypto-charts.info",
+        textangle=0,
+        xanchor='center',
+        xref="paper",
+        yref="paper"
+    ))
+
+    pie1.update_annotations(opacity=0.2)
+
+    return bar1, pie1, bar2
+
 attribution = dbc.Row(
     [
 #         dbc.Row([dbc.CardLink("Created by: @tc_madt", href="https://www.twitter.com/tc_madt")]),
