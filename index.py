@@ -28,12 +28,12 @@ time_interval_filter = html.Div([
     html.Div([html.P('Time interval:')],
              style={'display': 'inline-block', 'margin-left': '5px', 'margin-right': '15px'}),
 
-#     html.Div([dcc.DatePickerRange(
-#         id='date-picker-range',
-#         start_date=(pd.to_datetime(today) - pd.Timedelta(1, unit='d')).strftime('%Y-%m-%d'),
-#         end_date=today,
-#         display_format='YYYY-M-DD')],
-#         style={'display': 'inline-block'})
+    html.Div([dcc.DatePickerRange(
+        id='date-picker-range',
+        start_date=(pd.to_datetime(today) - pd.Timedelta(1, unit='d')).strftime('%Y-%m-%d'),
+        end_date=today,
+        display_format='YYYY-M-DD')],
+        style={'display': 'inline-block'})
 ])
 
 bundle_filter = html.Div([
@@ -73,7 +73,7 @@ blockchain_filter = html.Div([
 #     )])
 ])
 
-collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
+collapse_content = dbc.Card([dbc.Row([            
     dbc.Col(time_interval_filter),
                                       dbc.Col(bundle_filter),
                                       dbc.Col(category_filter),
