@@ -143,9 +143,8 @@ def toggle_collapse(n, is_open):
     return is_open
 
 attribution = dbc.Row(
-    [dbc.Row([
-        dbc.CardLink("Created by: @tc_madt", href="https://www.twitter.com/tc_madt")],
-    ),
+    [
+#         dbc.Row([dbc.CardLink("Created by: @tc_madt", href="https://www.twitter.com/tc_madt")]),
         dbc.Row([dbc.CardLink("Data Source: Crypto Fees", href="https://www.cryptofees.info")]),
     ]
 )
