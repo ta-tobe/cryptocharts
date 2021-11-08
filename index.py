@@ -8,6 +8,9 @@ import dash_bootstrap_components as dbc
 from dash_bootstrap_components._components.Container import Container
 import pandas as pd
 
+import requests
+
+
 
 
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -24,6 +27,35 @@ title = html.Div(
                 style={'text-align': 'center', 'color': 'grey'})
     ], className='card-title'
 )
+
+def cryptofees():
+    fees_requests = requests.get("https://cryptofees.info/api/v1/fees")
+    json_data = fees_requests.json()
+
+    _df = pd.json_normalize(json_data['protocols'],
+                            record_path=['fees'],
+                            meta=['name', 'tokenTicker', 'id', 'category', 'blockchain'],
+                            errors='ignore')
+
+    _df.loc[_df['blockchain'].isna(), 'blockchain'] = _df.name
+
+    return _df
+
+
+category_dict = {
+    'l1': 'Layer 1',
+    'l2': 'Layer 2',
+    'dex': 'Decentralized Exchange',
+    'lending': 'Lending',
+    'xchain': 'Cross Chain',
+    'other': 'Other'
+}
+
+df = cryptofees()
+
+df.category.replace(category_dict, inplace=True)
+
+today = max(df.date)
 
 time_interval_filter = html.Div([
     html.Div([html.P('Time interval:')],
