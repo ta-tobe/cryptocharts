@@ -6,3 +6,4 @@ dash-core-components
 dash-bootstrap-components
 dash-renderer
 gunicorn===19.9.0
+pandas
