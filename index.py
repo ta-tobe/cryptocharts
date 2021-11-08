@@ -332,7 +332,7 @@ attribution = dbc.Row(
 
 app.layout = html.Div([title,
                        navbar,
-#                        cards,
+                       cards,
                        attribution
                       ]
                       ,
