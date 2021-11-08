@@ -74,10 +74,10 @@ blockchain_filter = html.Div([
 ])
 
 collapse_content = dbc.Card([dbc.Row([            html.Div("One of three columns"),
-#     dbc.Col(time_interval_filter),
-#                                       dbc.Col(bundle_filter),
-#                                       dbc.Col(category_filter),
-#                                       dbc.Col(blockchain_filter)
+    dbc.Col(time_interval_filter),
+                                      dbc.Col(bundle_filter),
+                                      dbc.Col(category_filter),
+                                      dbc.Col(blockchain_filter)
 ]
                                      )], color="light")
 
