@@ -83,14 +83,14 @@ bundle_filter = html.Div([
 category_filter = html.Div([
     html.Div([html.P('Category:')],
              style={'margin-left': '5px', 'margin-right': '15px'}),
-#     html.Div([dcc.Dropdown(
-#         id='category-dropdown',
-#         options=[
-#             {'label': i, 'value': i} for i in df.category.unique().tolist()
-#         ],
-#         value=df.category.unique().tolist(),
-#         multi=True
-#     )])
+    html.Div([dcc.Dropdown(
+        id='category-dropdown',
+        options=[
+            {'label': i, 'value': i} for i in df.category.unique().tolist()
+        ],
+        value=df.category.unique().tolist(),
+        multi=True
+    )])
 ])
 
 blockchain_filter = html.Div([
