@@ -96,14 +96,14 @@ category_filter = html.Div([
 blockchain_filter = html.Div([
     html.Div([html.P('Blockchain:')],
              style={'margin-left': '5px', 'margin-right': '15px'}),
-#     html.Div([dcc.Dropdown(
-#         id='blockchain-dropdown',
-#         options=[
-#             {'label': i, 'value': i} for i in df.blockchain.unique().tolist()
-#         ],
-#         value=df.blockchain.unique().tolist(),
-#         multi=True
-#     )])
+    html.Div([dcc.Dropdown(
+        id='blockchain-dropdown',
+        options=[
+            {'label': i, 'value': i} for i in df.blockchain.unique().tolist()
+        ],
+        value=df.blockchain.unique().tolist(),
+        multi=True
+    )])
 ])
 
 collapse_content = dbc.Card([dbc.Row([            
