@@ -39,12 +39,12 @@ time_interval_filter = html.Div([
 bundle_filter = html.Div([
     html.Div([html.P('Bundle:')],
              style={'display': 'inline-block', 'margin-left': '5px', 'margin-right': '15px'}),
-#     html.Div([dbc.RadioItems(
-#         id='multichain-radioitems',
-#         options=[{'label': 'Multi-chain', 'value': 'M'},
-#                  {'label': 'Single-chain', 'value': 'S'}],
-#         value='M'
-#     )])
+    html.Div([dbc.RadioItems(
+        id='multichain-radioitems',
+        options=[{'label': 'Multi-chain', 'value': 'M'},
+                 {'label': 'Single-chain', 'value': 'S'}],
+        value='M'
+    )])
 ])
 
 category_filter = html.Div([
