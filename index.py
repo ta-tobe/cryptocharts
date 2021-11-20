@@ -169,12 +169,12 @@ cards = dbc.Row(
                    }
         ),
 
-        dbc.Row(
-            [
-                dbc.Col(first_card, width=6),
-                dbc.Col(second_card, width=6),
-            ],
-        ),
+#         dbc.Row(
+#             [
+#                 dbc.Col(first_card, width=6),
+#                 dbc.Col(second_card, width=6),
+#             ],
+#         ),
     ]
 )
 
