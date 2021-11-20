@@ -162,12 +162,12 @@ third_card = dbc.Card(fee_bchain)
 
 cards = dbc.Row(
     [
-#         dbc.Row(
-#             [dbc.Col(third_card)],
-#             style={'margin-top': 25, 'margin-bottom': 10,
-#                    # 'margin-right': '25px', 'margin-left': '25px',
-#                    }
-#         ),
+        dbc.Row(
+            [dbc.Col(third_card)],
+            style={'margin-top': 25, 'margin-bottom': 10,
+                   # 'margin-right': '25px', 'margin-left': '25px',
+                   }
+        ),
 
         dbc.Row(
             [
