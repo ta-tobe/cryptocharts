@@ -331,9 +331,9 @@ attribution = dbc.Row(
 )
 
 app.layout = html.Div([title,
-#                        navbar,
+                       navbar,
 #                        cards,
-#                        attribution
+                       attribution
                       ]
                       ,
                       style={'margin-top': 10, 'margin-bottom': 10,
